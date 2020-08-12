@@ -89,6 +89,7 @@ const mongoClient = new MongoClient(mongoUrl, {
 });
 
 // Connect to the MongoDB database
+console.log(`Connecting to ${mongoUrl}`);
 mongoClient.connect(err => {
     if (err) {
         console.log('Couldn\'t connect to the Mongo database');
@@ -96,7 +97,7 @@ mongoClient.connect(err => {
         process.exit(1);
     }
 
-    console.log(`Connected to ${mongoUrl}`);
+    console.log(`Connected`);
 
     const mdb = mongoClient.db(program.mongodbDbname);
     const collection = mdb.collection(program.mongodbCollection);
@@ -110,7 +111,6 @@ mongoClient.connect(err => {
         }
 
         const data = ndb.getAllData();
-        console.log({ data });
 
         if (data.length === 0) {
             console.log(
